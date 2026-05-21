@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savidhan Sabha</title>
+    <Style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  
+  }
+  
+  
+  .container {
+      width: 90%;
+      margin: 50px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  
+  h1 {
+      text-align: center;
+  }
+  
+  .question {
+      margin-bottom: 20px;
+      border-radius: 2px;
+      box-shadow: 1px 2px 6px rgb(3 3 28);
+      padding: 10px;  
+  }
+  
+  button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  button:hover {
+      background-color: #45a049;
+  }
+  
+  .hidden {
+      display: none;
+  }
+  
+  
+  
+  div.sticky {
+      font-size: 18px;
+      color: red;
+      background-color: rgb(25, 25, 26);
+      border: 2px solid black;
+      text-align: center;
+      top: 0;
+      position: sticky; 
+      z-index: 0;
+      
+  
+  }
+  
+  #result {
+      text-align: center;
+  }
+  
+  #score {
+      font-size: 24px;
+      font-weight: bold;
+  }
+  
+  
+  p{
+    color: red;
+    
+    
+  }
+  #explanation{
+    text-align: left;
+    color: black;
+  }
+
+  .when{
+    color: blue;
+    align-content: end;
+  }
+ 
+
+    </Style>
+</head>
+<body>
+
+
+     <div class="container">       
+            <h1>Delhi Police Mock_01</h1>
+     <div class="sticky" id="timer">Time Left: <span id="time">00:00</span> seconds</div>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. मनुष्य इतिहास में किस काल में खाद्य उत्पादक बना ? <span class="when">(D.P. Const. 30 Nov. 2023)</span> </p>
+                <label><input type="radio" name="question0" value="A"> पुरापाषाण युग  </label><br>
+                <label><input type="radio" name="question0" value="B"> मध्यपाषाण युग </label><br>
+                <label><input type="radio" name="question0" value="C"> नवपाषाण युग  </label><br>
+                <label><input type="radio" name="question0" value="D"> ताम्रपाषाण युग </label><br>
+            </div>
+        
+            <div class="question">
+                <p>2. निम्नलिखित में से किस राज्य में दैमाबाद नामक ताम्रपाषाणकालीन सांस्कृतिक स्थल स्तिथ है ?<span class="when">(D.P. Const. 27 Nov. 2020)</span></p>
+                <label><input type="radio" name="question1" value="A"> महाराष्ट्र </label><br>
+                <label><input type="radio" name="question1" value="B"> उतर प्रदेश </label><br>
+                <label><input type="radio" name="question1" value="C"> पंजाब </label><br>
+                <label><input type="radio" name="question1" value="D"> ओडिशा </label><br>
+            </div>
+        
+            <div class="question">
+                <p>3. निम्नलिखित में से कोन सा उगम नही है ? <span class="when">(D.P. Const. 27 Nov. 2020)</span></p>
+                <label><input type="radio" name="question2" value="A"> भीमबेटका - छतीसगढ़</label><br>
+                <label><input type="radio" name="question2" value="B"> हम्पी - कर्नाटक</label><br>
+                <label><input type="radio" name="question2" value="C"> फतेहपुर सिकरी - उतर प्रदेश </label><br>
+                <label><input type="radio" name="question2" value="D"> कोणार्क - ओडिशा </label><br>
+            </div>
+        
+            <div class="question">
+                <p>4. एतिहासिक सीढ़ीदार कुआ (बावली)अग्रसेन की बावली कहा स्तिथ है ?<span class="when">(D.P. Const. 27 Nov. 2020)</span></p>
+                <label><input type="radio" name="question3" value="A"> चेनई </label><br>
+                <label><input type="radio" name="question3" value="B"> दिल्ली </label><br>
+                <label><input type="radio" name="question3" value="C"> कोलकाता </label><br>
+                <label><input type="radio" name="question3" value="D"> चंडीगढ़ </label><br>
+            </div>
+        
+            <div class="question">
+                <p>5. हड़प्पा सभ्यता के दौरान ......... की मूर्तियों को बनाने के लिए लॉस्ट बेकस कास्टिंग तकनीक का उपयोग किया गया था | <span class="when">(D.P. Const. 24 Nov. 2023)</span></p>
+                <label><input type="radio" name="question4" value="A"> लकड़ी </label><br>
+                <label><input type="radio" name="question4" value="B"> संगमरमर </label><br>
+                <label><input type="radio" name="question4" value="C"> कास्य </label><br>
+                <label><input type="radio" name="question4" value="D"> पथर </label><br>
+            </div>
+        
+            <div class="question">
+                <p>6. सुरकोटदा पुरातात्विक स्थल किस राज्य में स्तिथ है ? <span class="when">(D.P. Const. 2 Dec 2020)</span></p>
+                <label><input type="radio" name="question5" value="A"> कर्नाटक </label><br>
+                <label><input type="radio" name="question5" value="B"> गुजरात </label><br>
+                <label><input type="radio" name="question5" value="C"> हरियाणा </label><br>
+                <label><input type="radio" name="question5" value="D"> राजस्थान </label><br>
+            </div>
+        
+            <div class="question">
+                <p>7. निम्नलिखित में से कौन-सा हड़प्पाकालीन स्थल गुजरात में स्तिथ नही है ? <span class="when">(D.P. Const. 3 Dec. 2020)</span></p>
+                <label><input type="radio" name="question6" value="A"> धोलावीरा </label><br>
+                <label><input type="radio" name="question6" value="B"> रंगपुर </label><br>
+                <label><input type="radio" name="question6" value="C"> आमरी </label><br>
+                <label><input type="radio" name="question6" value="D"> लोथल </label><br>
+            </div>
+        
+            <div class="question">
+                <p>8. हड़प्पा स्थल कालीबंगा किस वर्तमान भारतीय राज्य में स्तिथ है ? <span class="when">(D.P. Const. 8 Dec. 2020)</span></p>
+                <label><input type="radio" name="question7" value="A"> राजस्थान </label><br>
+                <label><input type="radio" name="question7" value="B"> बिहार </label><br>
+                <label><input type="radio" name="question7" value="C"> मध्य प्रदेश </label><br>
+                <label><input type="radio" name="question7" value="D"> गुजरात </label><br>
+            </div>
+            <div class="question">
+                <a href="https://t.me/+bubWt6XfyXswOWM1">
+                <img src="Telegram Logo.png" alt="https://t.me/+bubWt6XfyXswOWM1" width="100" height="132"> </a>
+            </div>
+        
+            <div class="question">
+                <p>9. मोहनजोदड़ो की नृत्य करती लड़की की प्रतिमा किस्से बनी थी ? <span class="when">(D.P. Const. 27 Nov. 2020)</span></p>
+                <label><input type="radio" name="question8" value="A"> लोहा </label><br>
+                <label><input type="radio" name="question8" value="B"> सोना </label><br>
+                <label><input type="radio" name="question8" value="C"> चांदी </label><br>
+                <label><input type="radio" name="question8" value="D"> कास्य </label><br>
+            </div>
+        
+            <div class="question">
+                <p>10. सिन्धु सभ्यता का सबसे बड़ा भारतीय स्थल कौन सा है ? <span class="when">(D.P. Const. 08 Dec. 2017)</span></p>
+                <label><input type="radio" name="question9" value="A"> लोथल </label><br>
+                <label><input type="radio" name="question9" value="B"> रखिगढ़ी </label><br>
+                <label><input type="radio" name="question9" value="C"> धोलावीरा </label><br>
+                <label><input type="radio" name="question9" value="D"> चन्हुदड़ो </label><br>
+            </div>
+        
+            <div class="question">
+                <p>11. निम्नलिखित में से कोन सा हड़प्पाई स्थल हरियाणा में स्तिथ है ? <span class="when">(D.P. Const. 05 Dec. 2017)</span></p>
+                <label><input type="radio" name="question10" value="A"> धोलावीरा </label><br>
+                <label><input type="radio" name="question10" value="B"> राखिगढ़ी </label><br>
+                <label><input type="radio" name="question10" value="C"> कालीबंगन </label><br>
+                <label><input type="radio" name="question10" value="D"> आलमगीरपुर</label><br>
+            </div>
+        
+            <div class="question">
+                <p>12. धोलावीरा का हड़प्पा नगर कितने भागो में विभाजित था ? <span class="when">(D.P. Const. 14 Nov. 2023)</span></p>
+                <label><input type="radio" name="question11" value="A"> 3 </label><br>
+                <label><input type="radio" name="question11" value="B"> 5 </label><br>
+                <label><input type="radio" name="question11" value="C"> 4 </label><br>
+                <label><input type="radio" name="question11" value="D"> 2 </label><br>
+            </div>
+        
+            <div class="question">
+                <p>13. निम्नलिखित में से किस हड़प्पा संरचना में पानी के रिसाव को रोकने के लिए डामर की पतली परत लगी थी ? <span class="when">(D.P. Const. 30 Nov. 2023)</span></p>
+                <label><input type="radio" name="question12" value="A"> जलनिकास </label><br>
+                <label><input type="radio" name="question12" value="B"> सड़के </label><br>
+                <label><input type="radio" name="question12" value="C"> अन्न भंडार </label><br>
+                <label><input type="radio" name="question12" value="D"> बृहतस्नानगार </label><br>
+            </div>
+        
+            <div class="question">
+                <p>14. हड़प्पा सभ्यता की मुहरो पर निम्नलिखित में से कौन-सा पशु अक्सर देखा जाता था ? </p>
+                <label><input type="radio" name="question13" value="A"> बैल </label><br>
+                <label><input type="radio" name="question13" value="B"> शेर </label><br>
+                <label><input type="radio" name="question13" value="C"> लोमड़ी </label><br>
+                <label><input type="radio" name="question13" value="D"> हिरन </label><br>
+            </div>
+        
+            <div class="question">
+                <p>15. सिन्धु घाटी सभ्यता का सबसे पहला खोजा गया स्थल कौन सा था ?</p>
+                <label><input type="radio" name="question14" value="A"> लोथल</label><br>
+                <label><input type="radio" name="question14" value="B"> कालीबंगन </label><br>
+                <label><input type="radio" name="question14" value="C"> मोहनजोदड़ो </label><br>
+                <label><input type="radio" name="question14" value="D"> हड़प्पा</label><br>
+            </div>
+            
+            <button type="submit">Submit Quiz</button>
+        </form>
+        <div id="result" class="hidden">
+            <h2>Results</h2>
+            <p id="score"></p>
+            <p id="explanation"></p>
+        </div>
+
+    <script>
+       
+
+       let timeLeft = 420;
+let timerInterval;
+function startTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  document.getElementById('time').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+   
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            submitQuiz();  // Automatically submit quiz when time is up
+        }
+       
+        timeLeft--;
+    } 
+    timerInterval = setInterval(startTimer,1000);
+
+
+// Handle quiz submission
+document.getElementById("quizForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    submitQuiz();
+});
+
+// Submit the quiz and show results
+function submitQuiz() {
+    clearInterval(timerInterval);
+    
+    const form = document.forms["quizForm"];
+    let score = 0;
+    let explanation = "";
+
+    // Check answers
+    if (form.question0.value  === "C") score++;
+            else explanation += `1. मनुष्य इतिहास में किस काल में खाद्य उत्पादक बना ?  </br>
+                                 A. पुरापाषाण युग         </br>                    
+                                 B. मध्यपाषाण युग        </br>               
+                                 C. नवपाषाण युग         </br>          
+                                 D. ताम्रपाषाण युग        </br>
+                                 Correct Answer : C  </br>
+                                 </br>`;
+           if (form.question1.value  === "A") score++;
+            else explanation +=`2. निम्नलिखित में से किस राज्य में दैमाबाद नामक ताम्रपाषाणकालीन सांस्कृतिक स्थल स्तिथ है ?  </br>
+                                 A. महाराष्ट्र        </br>                    
+                                 B. उतर प्रदेश        </br>               
+                                 C. पंजाब        </br>          
+                                 D. ओडिशा        </br>
+                                 Correct Answer : A </br>
+                                 </br> `;  
+           if (form.question2.value  === "A") score++;
+            else explanation += `3. निम्नलिखित में से कोन सा उगम नही है ?  </br>
+                                 A. भीमबेटका - छतीसगढ़       </br>                    
+                                 B. हम्पी - कर्नाटक       </br>               
+                                 C. फतेहपुर सिकरी - उतर प्रदेश        </br>          
+                                 D. कोणार्क - ओडिशा        </br>
+                                 Correct Answer : A  </br>
+                                 </br> `;  
+           if (form.question3.value  === "B") score++;
+            else explanation += `4. एतिहासिक सीढ़ीदार कुआ (बावली)अग्रसेन की बावली कहा स्तिथ है ?  </br>
+                                 A. चेनई        </br>                    
+                                 B. दिल्ली        </br>               
+                                 C. कोलकाता        </br>          
+                                 D. चंडीगढ़        </br>
+                                 Correct Answer : B  </br>
+                                 </br> `;  
+           if (form.question4.value  === "C") score++;
+            else explanation += `5. हड़प्पा सभ्यता के दौरान ......... की मूर्तियों को बनाने के लिए लॉस्ट बेकस कास्टिंग तकनीक का उपयोग किया गया था |  </br>
+                                 A. लकड़ी        </br>                    
+                                 B. संगमरमर        </br>               
+                                 C. कास्य        </br>          
+                                 D. पथर        </br>
+                                 Correct Answer : C  </br>
+                                 </br> `;  
+           if (form.question5.value  === "B") score++;
+            else explanation += `6. सुरकोटदा पुरातात्विक स्थल किस राज्य में स्तिथ है ?  </br>
+                                 A. कर्नाटक        </br>                    
+                                 B. गुजरात        </br>               
+                                 C. हरियाणा        </br>          
+                                 D. राजस्थान        </br>
+                                 Correct Answer : B  </br>
+                                 </br> `;  
+           if (form.question6.value  === "C") score++;
+            else explanation += `7. निम्नलिखित में से कौन-सा हड़प्पाकालीन स्थल गुजरात में स्तिथ नही है ?  </br>
+                                 A. धोलावीरा        </br>                    
+                                 B. रंगपुर        </br>               
+                                 C. आमरी        </br>          
+                                 D. लोथल        </br>
+                                 Correct Answer : C  </br>
+                                 </br> `;  
+           if (form.question7.value  === "A") score++;
+            else explanation += `8. हड़प्पा स्थल कालीबंगा किस वर्तमान भारतीय राज्य में स्तिथ है ?  </br>
+                                 A. राजस्थान        </br>                    
+                                 B. बिहार        </br>               
+                                 C. मध्य प्रदेश        </br>          
+                                 D. गुजरात        </br>
+                                 Correct Answer : A  </br>
+                                 </br> `;  
+           if (form.question8.value  === "D") score++;
+            else explanation += `9. मोहनजोदड़ो की नृत्य करती लड़की की प्रतिमा किस्से बनी थी ?  </br>
+                                 A. लोहा        </br>                    
+                                 B. सोना        </br>               
+                                 C. चांदी        </br>          
+                                 D. कास्य        </br>
+                                 Correct Answer : D  </br>
+                                 </br> `;  
+           if (form.question9.value  === "B") score++;
+            else explanation += `10. सिन्धु सभ्यता का सबसे बड़ा भारतीय स्थल कौन सा है ?  </br>
+                                 A. लोथल        </br>                    
+                                 B. रखिगढ़ी        </br>               
+                                 C. धोलावीरा        </br>          
+                                 D. चन्हुदड़ो        </br>
+                                 Correct Answer : B  </br>
+                                 </br> `;  
+           if (form.question10.value  === "B") score++;
+            else explanation += `11. निम्नलिखित में से कोन सा हड़प्पाई स्थल हरियाणा में स्तिथ है ?  </br>
+                                 A. धोलावीरा        </br>                    
+                                 B. राखिगढ़ी        </br>               
+                                 C. कालीबंगन        </br>          
+                                 D. आलमगीरपुर       </br>
+                                 Correct Answer : B  </br>
+                                 </br> `;  
+           if (form.question11.value  === "A") score++;
+            else explanation += `12. धोलावीरा का हड़प्पा नगर कितने भागो में विभाजित था ?  </br>
+                                 A. 3        </br>                    
+                                 B. 5        </br>               
+                                 C. 4        </br>          
+                                 D. 2        </br>
+                                 Correct Answer : A  </br>
+                                 </br> `;  
+           if (form.question12.value  === "D") score++;
+            else explanation += `13. निम्नलिखित में से किस हड़प्पा संरचना में पानी के रिसाव को रोकने के लिए डामर की पतली परत लगी थी ?  </br>
+                                 A. जलनिकास        </br>                    
+                                 B. सड़के        </br>               
+                                 C. अन्न भंडार        </br>          
+                                 D. बृहतस्नानगार        </br>
+                                 Correct Answer : D  </br>
+                                 </br> `;  
+           if (form.question13.value  === "A") score++;
+            else explanation +=`14. हड़प्पा सभ्यता की मुहरो पर निम्नलिखित में से कौन-सा पशु अक्सर देखा जाता था ?  </br>
+                                 A. बैल        </br>                    
+                                 B. शेर        </br>               
+                                 C. लोमड़ी        </br>          
+                                 D. हिरन        </br>
+                                 Correct Answer : A  </br>
+                                 </br> `;  
+           if (form.question14.value  === "D") score++;
+            else explanation +=`15. सिन्धु घाटी सभ्यता का सबसे पहला खोजा गया स्थल कौन सा था ?  </br>
+                                 A. लोथल       </br>                    
+                                 B. कालीबंगन        </br>               
+                                 C. मोहनजोदड़ो        </br>          
+                                 D. हड़प्पा       </br>
+                                 Correct Answer : D </br>
+                                 </br> `;  
+
+
+    // Show results
+    document.getElementById("score").textContent = `Your score: ${score}/15`;
+    document.getElementById("explanation").innerHTML = explanation;
+    document.getElementById("result").classList.remove("hidden");
+    document.getElementById('quizForm').reset();
+    document.getElementById('quizForm').remove("hidden");
+    document.getElementById('timer').remove("hidden");
+}
+
+// Start the timer when the page loads
+window.onload = startTimer;
+    </script>
+</body>
+</html>
