@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome – Parveen Sheoran</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold:   #d4a853;
+    --gold2:  #f0cc80;
+    --rose:   #c8637a;
+    --deep:   #0a0612;
+    --mid:    #130d20;
+    --text:   #f5ece0;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--deep);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text);
+    cursor: none;
+  }
+
+  /* ── Custom Cursor ── */
+  #cursor {
+    position: fixed; top: 0; left: 0;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform .12s ease, border-color .2s;
+    z-index: 9999;
+    mix-blend-mode: screen;
+  }
+  #cursor-dot {
+    position: fixed; top: 0; left: 0;
+    width: 5px; height: 5px;
+    background: var(--gold2);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: transform .06s ease;
+  }
+
+  /* ── Deep Space BG ── */
+  #scene {
+    position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, #1a0730 0%, var(--deep) 65%);
+  }
+
+  canvas#stars {
+    position: fixed; inset: 0;
+    z-index: 0;
+  }
+
+  /* ── Aurora bands ── */
+  .aurora {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0;
+    animation: auroraIn 2.5s ease forwards;
+  }
+  .aurora-1 {
+    width: 700px; height: 300px;
+    top: -80px; left: -100px;
+    background: radial-gradient(ellipse, #6a1a8a55, transparent 70%);
+    animation-delay: .4s;
+  }
+  .aurora-2 {
+    width: 500px; height: 250px;
+    bottom: -60px; right: -80px;
+    background: radial-gradient(ellipse, #c8637a44, transparent 70%);
+    animation-delay: .8s;
+  }
+  .aurora-3 {
+    width: 400px; height: 200px;
+    top: 30%; left: 55%;
+    background: radial-gradient(ellipse, #d4a85322, transparent 70%);
+    animation-delay: 1.2s;
+  }
+  @keyframes auroraIn {
+    to { opacity: 1; }
+  }
+
+  /* ── Floating orbs ── */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: drift linear infinite;
+    opacity: 0;
+  }
+  @keyframes drift {
+    0%   { transform: translateY(0) scale(1);   opacity: 0; }
+    10%  { opacity: .6; }
+    90%  { opacity: .4; }
+    100% { transform: translateY(-110vh) scale(.6); opacity: 0; }
+  }
+
+  /* ── Center Stage ── */
+  #stage {
+    position: fixed; inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  /* ── Crown icon ── */
+  .crown-wrap {
+    opacity: 0;
+    transform: translateY(-30px) scale(.8);
+    animation: dropIn .9s cubic-bezier(.22,1,.36,1) .6s forwards;
+    margin-bottom: 1.4rem;
+  }
+  .crown-wrap svg {
+    width: 64px; height: 64px;
+    filter: drop-shadow(0 0 18px var(--gold));
+  }
+
+  /* ── Greeting line ── */
+  .greeting {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(.9rem, 2.2vw, 1.15rem);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--gold2);
+    opacity: 0;
+    animation: fadeUp .8s ease .9s forwards;
+    margin-bottom: 1rem;
+  }
+
+  /* ── Name ── */
+  .name-wrap {
+    position: relative;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .name-first, .name-last {
+    display: block;
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 900;
+    background: linear-gradient(135deg, #d4a853 0%, #f5e090 45%, #c8637a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0;
+    text-shadow: none;
+    position: relative;
+  }
+  .name-first {
+    font-size: clamp(3rem, 10vw, 8rem);
+    animation: revealLeft 1s cubic-bezier(.22,1,.36,1) 1.2s forwards;
+    letter-spacing: .06em;
+  }
+  .name-last {
+    font-size: clamp(2rem, 6.5vw, 5.2rem);
+    animation: revealRight 1s cubic-bezier(.22,1,.36,1) 1.55s forwards;
+    letter-spacing: .25em;
+  }
+
+  /* ── Glow ring behind name ── */
+  .name-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, #d4a85318 0%, transparent 70%);
+    animation: pulse 3s ease-in-out 2.5s infinite;
+    pointer-events: none;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex; align-items: center; gap: 1.2rem;
+    margin-bottom: 1.4rem;
+    opacity: 0;
+    animation: fadeUp .8s ease 2s forwards;
+  }
+  .divider-line {
+    width: clamp(60px, 12vw, 140px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .divider-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold2);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--gold);
+  }
+
+  /* ── Tagline ── */
+  .tagline {
+    font-size: clamp(.85rem, 1.8vw, 1.05rem);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: .15em;
+    color: #e8d4b8cc;
+    opacity: 0;
+    animation: fadeUp .8s ease 2.2s forwards;
+    max-width: 480px;
+    line-height: 1.8;
+  }
+
+  /* ── Glitter sparks ── */
+  .spark {
+    position: fixed;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--gold2);
+    pointer-events: none;
+    animation: sparkle var(--dur, 2s) ease forwards;
+    opacity: 0;
+  }
+  @keyframes sparkle {
+    0%   { transform: translate(0,0) scale(0); opacity: 0; }
+    30%  { opacity: 1; transform: translate(var(--tx,.5em), var(--ty,-.5em)) scale(1); }
+    100% { transform: translate(var(--tx2,1em), var(--ty2,1em)) scale(0); opacity: 0; }
+  }
+
+  /* ── Scroll hint ── */
+  .scroll-hint {
+    position: fixed;
+    bottom: 2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #d4a85388;
+    opacity: 0;
+    animation: fadeUp .8s ease 3s forwards;
+    display: flex; flex-direction: column; align-items: center; gap: .6rem;
+  }
+  .scroll-arrow {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: .3; transform: scaleY(.8); }
+    50%       { opacity: 1;  transform: scaleY(1.1); }
+  }
+
+  /* ── Keyframes ── */
+  @keyframes dropIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .greeting  { transform: translateY(16px); }
+  .tagline   { transform: translateY(16px); }
+  .divider   { transform: translateY(10px); }
+  .scroll-hint { transform: translateX(-50%) translateY(10px); }
+
+  @keyframes revealLeft {
+    0%   { opacity: 0; transform: translateX(-60px) skewX(-8deg); clip-path: inset(0 100% 0 0); }
+    100% { opacity: 1; transform: translateX(0) skewX(0); clip-path: inset(0 0% 0 0); }
+  }
+  @keyframes revealRight {
+    0%   { opacity: 0; transform: translateX(60px) skewX(8deg); clip-path: inset(0 0 0 100%); }
+    100% { opacity: 1; transform: translateX(0) skewX(0); clip-path: inset(0 0 0 0%); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: .4; transform: scale(1); }
+    50%       { opacity: .8; transform: scale(1.08); }
+  }
+
+  /* ── Ripple on click ── */
+  .ripple {
+    position: fixed;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold2);
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    animation: rippleOut .7s ease forwards;
+    opacity: 0;
+  }
+  @keyframes rippleOut {
+    0%   { transform: translate(-50%,-50%) scale(0); opacity: .8; }
+    100% { transform: translate(-50%,-50%) scale(6); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div id="scene"></div>
+<canvas id="stars"></canvas>
+
+<div class="aurora aurora-1"></div>
+<div class="aurora aurora-2"></div>
+<div class="aurora aurora-3"></div>
+
+<div id="cursor"></div>
+<div id="cursor-dot"></div>
+
+<section id="stage">
+  <div class="crown-wrap">
+    <svg viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="4,44 14,14 32,30 50,14 60,44" fill="none" stroke="url(#cg)" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="4"  cy="44" r="3.5" fill="#f0cc80"/>
+      <circle cx="60" cy="44" r="3.5" fill="#f0cc80"/>
+      <circle cx="32" cy="30" r="4.5" fill="#f0cc80"/>
+      <circle cx="14" cy="14" r="3.5" fill="#f0cc80"/>
+      <circle cx="50" cy="14" r="3.5" fill="#f0cc80"/>
+      <circle cx="32" cy="8"  r="5"   fill="url(#cg)" opacity=".9"/>
+      <line x1="4" y1="44" x2="60" y2="44" stroke="url(#cg)" stroke-width="2.5"/>
+      <defs>
+        <linearGradient id="cg" x1="0" y1="0" x2="64" y2="48" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"  stop-color="#d4a853"/>
+          <stop offset="50%" stop-color="#f5e090"/>
+          <stop offset="100%" stop-color="#c8637a"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <p class="greeting">✦ A Warm Welcome To ✦</p>
+
+  <div class="name-wrap">
+    <div class="name-glow"></div>
+    <span class="name-first">Parveen</span>
+    <span class="name-last">Sheoran</span>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="tagline">Elegance in every step &middot; Grace in every word<br>A spirit that illuminates every room</p>
+</section>
+
+<div class="scroll-hint">
+  <span>Explore</span>
+  <div class="scroll-arrow"></div>
+</div>
+
+<script>
+// ── Stars Canvas ──
+(function(){
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  let W, H, stars = [];
+
+  function resize(){
+    W = c.width  = window.innerWidth;
+    H = c.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); init(); });
+
+  function init(){
+    stars = [];
+    const n = Math.floor(W * H / 3500);
+    for(let i=0;i<n;i++){
+      stars.push({
+        x: Math.random()*W, y: Math.random()*H,
+        r: Math.random()*1.4+.2,
+        a: Math.random(),
+        speed: Math.random()*.4+.1,
+        twinkle: Math.random()*Math.PI*2
+      });
+    }
+  }
+  init();
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.twinkle += s.speed * .02;
+      const alpha = .2 + .8*(.5+.5*Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(245,236,210,${alpha * s.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw(0);
+})();
+
+// ── Floating Orbs ──
+(function(){
+  const colors = ['#d4a85344','#c8637a33','#8b3ea822','#f0cc8033'];
+  function makeOrb(){
+    const el = document.createElement('div');
+    el.className = 'orb';
+    const size = 20 + Math.random()*60;
+    const dur  = 8 + Math.random()*14;
+    el.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}vw;
+      bottom:${-size}px;
+      background: radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]}, transparent 70%);
+      animation-duration:${dur}s;
+      animation-delay:${Math.random()*6}s;
+      filter:blur(${4+Math.random()*8}px);
+    `;
+    document.body.appendChild(el);
+    el.addEventListener('animationend', ()=> { el.remove(); makeOrb(); });
+  }
+  for(let i=0;i<14;i++) makeOrb();
+})();
+
+// ── Custom Cursor ──
+(function(){
+  const ring = document.getElementById('cursor');
+  const dot  = document.getElementById('cursor-dot');
+  document.addEventListener('mousemove', e=>{
+    ring.style.left = e.clientX + 'px';
+    ring.style.top  = e.clientY + 'px';
+    dot.style.left  = e.clientX + 'px';
+    dot.style.top   = e.clientY + 'px';
+  });
+})();
+
+// ── Glitter Sparks ──
+(function(){
+  function spark(x, y){
+    for(let i=0;i<6;i++){
+      const el = document.createElement('div');
+      el.className = 'spark';
+      const angle = (Math.random()*360) * Math.PI/180;
+      const dist1 = 20 + Math.random()*50;
+      const dist2 = 40 + Math.random()*80;
+      el.style.cssText = `
+        left:${x}px; top:${y}px;
+        --tx: ${Math.cos(angle)*dist1}px;
+        --ty: ${Math.sin(angle)*dist1}px;
+        --tx2: ${Math.cos(angle)*dist2}px;
+        --ty2: ${Math.sin(angle)*dist2}px;
+        --dur: ${.8+Math.random()*.8}s;
+        background: hsl(${40+Math.random()*30},80%,${65+Math.random()*20}%);
+        animation-delay: ${Math.random()*.1}s;
+      `;
+      document.body.appendChild(el);
+      el.addEventListener('animationend', ()=>el.remove());
+    }
+  }
+
+  // auto sparks on name
+  setInterval(()=>{
+    const name = document.querySelector('.name-first');
+    if(!name) return;
+    const r = name.getBoundingClientRect();
+    spark(r.left + Math.random()*r.width, r.top + Math.random()*r.height);
+  }, 600);
+
+  document.addEventListener('mousemove', e=>{
+    if(Math.random() > .88) spark(e.clientX, e.clientY);
+  });
+})();
+
+// ── Click Ripple ──
+document.addEventListener('click', e=>{
+  const el = document.createElement('div');
+  el.className = 'ripple';
+  el.style.cssText = `left:${e.clientX}px; top:${e.clientY}px; width:60px; height:60px;`;
+  document.body.appendChild(el);
+  el.addEventListener('animationend', ()=>el.remove());
+});
+</script>
+</body>
+</html>
